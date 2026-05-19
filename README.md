@@ -2,6 +2,16 @@
 
 An enterprise-style e-commerce web application built with Next.js, TypeScript, Prisma, SQLite, Stripe Checkout, and Tailwind CSS.
 
+## Project Highlights
+
+- Full-stack e-commerce workflow
+- Product catalog connected with Prisma database
+- Add-to-cart and checkout flow
+- Stripe Checkout payment integration
+- Seller dashboard for product and inventory management
+- Admin dashboard with real-time analytics
+- AI-style recommendation page
+- Order tracking and stock updates
 ## Features
 
 - Product listing from database
