@@ -1,6 +1,17 @@
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import { isAdmin } from "@/lib/admin";
+import LogoutButton from "@/components/LogoutButton";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const adminUser = isAdmin(user?.email);
+
   return (
     <nav className="sticky top-0 z-50 border-b bg-white/90 px-6 py-4 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -33,17 +44,35 @@ export default function Navbar() {
             AI Picks
           </Link>
 
-          <Link href="/seller" className="hover:text-purple-600">
-            Admin
-          </Link>
+          {adminUser && (
+            <>
+              <Link href="/seller" className="hover:text-purple-600">
+                Seller
+              </Link>
+
+              <Link href="/admin" className="hover:text-purple-600">
+                Admin
+              </Link>
+
+              <Link href="/inventory" className="hover:text-purple-600">
+                Inventory
+              </Link>
+            </>
+          )}
         </div>
 
-        <Link
-          href="/login"
-          className="rounded-full bg-purple-600 px-5 py-2 text-sm font-medium text-white hover:bg-purple-700"
-        >
-          Login
-        </Link>
+        <div>
+          {user ? (
+            <LogoutButton />
+          ) : (
+            <Link
+              href="/login"
+              className="rounded-full bg-purple-600 px-5 py-2 text-sm font-medium text-white hover:bg-purple-700"
+            >
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
