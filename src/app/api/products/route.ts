@@ -5,7 +5,19 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const { name, category, description, price, stock, image, rating } = body;
+    const {
+      name,
+      brand,
+      category,
+      description,
+      price,
+      stock,
+      image,
+      imageUrl,
+      rating,
+      storeName,
+      externalUrl,
+    } = body;
 
     const seller = await prisma.seller.findFirst({
       where: {
@@ -23,12 +35,16 @@ export async function POST(request: Request) {
     const product = await prisma.product.create({
       data: {
         name,
+        brand,
         category,
         description,
         price: Number(price),
         stock: Number(stock),
-        image,
+        image: image || "📦",
+        imageUrl: imageUrl || null,
         rating: Number(rating),
+        storeName,
+        externalUrl,
         sellerId: seller.id,
       },
     });

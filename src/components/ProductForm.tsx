@@ -8,14 +8,17 @@ export default function ProductForm() {
 
   const [form, setForm] = useState({
     name: "",
+    brand: "",
     category: "",
     description: "",
     price: "",
     stock: "",
     image: "📦",
+    imageUrl: "",
     rating: "4.5",
-  });
-
+    storeName: "",
+    externalUrl: "",
+});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -47,13 +50,17 @@ export default function ProductForm() {
 
       setForm({
         name: "",
+        brand: "",
         category: "",
         description: "",
         price: "",
         stock: "",
         image: "📦",
+        imageUrl: "",
         rating: "4.5",
-      });
+        storeName: "",
+        externalUrl: "",
+});
 
       router.refresh();
     } else {
@@ -127,6 +134,39 @@ export default function ProductForm() {
           step="0.1"
           className="rounded-lg border px-4 py-3"
         />
+        <input
+  name="brand"
+  value={form.brand}
+  onChange={handleChange}
+  placeholder="Brand name"
+  className="rounded-lg border px-4 py-3"
+/>
+
+<input
+  name="storeName"
+  value={form.storeName}
+  onChange={handleChange}
+  placeholder="Store name e.g. Amazon, Walmart, Shein"
+  required
+  className="rounded-lg border px-4 py-3"
+/>
+
+<input
+  name="externalUrl"
+  value={form.externalUrl}
+  onChange={handleChange}
+  placeholder="External product link"
+  required
+  className="rounded-lg border px-4 py-3"
+/>
+
+<input
+  name="imageUrl"
+  value={form.imageUrl}
+  onChange={handleChange}
+  placeholder="Product image URL"
+  className="rounded-lg border px-4 py-3"
+/>
       </div>
 
       <textarea
